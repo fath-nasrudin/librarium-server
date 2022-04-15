@@ -10,7 +10,15 @@
   "author": "fath-nasrudin",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3"
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.10",
+    "morgan": "^1.10.0",
+    "morgan-json": "^1.1.0",
+    "swagger-ui-express": "^4.3.0",
+    "winston": "^3.7.2"
   },
   "devDependencies": {
     "eslint": "^8.13.0",
