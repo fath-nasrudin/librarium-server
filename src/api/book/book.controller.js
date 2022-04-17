@@ -46,8 +46,6 @@ class BookController {
   }
 
   static async updateBook(req, res, next) {
-    // take the id
-    // update based on its id
     try {
       const { id } = req.query;
       const updatedBook = await Book.findByIdAndUpdate(id, req.body, { returnDocument: 'after' });
@@ -64,7 +62,7 @@ class BookController {
       const { id } = req.query;
 
       await Book.findByIdAndDelete(id);
-      res.send({ bookId: id });
+      res.send({ book: { id } });
     } catch (error) {
       next(error);
     }

@@ -18,4 +18,16 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB;
+const disconnectDB = async () => {
+  try {
+    await mongoose.disconnect();
+    logger.info('db disconnected');
+  } catch (error) {
+    logger.error(error);
+    process.exit(1);
+  }
+};
+module.exports = {
+  connectDB,
+  disconnectDB,
+};

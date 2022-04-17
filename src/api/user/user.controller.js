@@ -2,11 +2,56 @@ const bcrypt = require('bcryptjs');
 
 const User = require('../../models/user');
 const Role = require('../../models/role');
-const { Api400Error, Api500Error } = require('../../utils/error');
+const { Api400Error, Api500Error, Api404Error } = require('../../utils/error');
 const { generateToken } = require('../../utils/auth');
 
 class UserController {
   static async createUser(req, res, next) {
+    const { name, email, password } = req.body;
+
+    try {
+      // simple validation. change to JOI later
+      if (!name || !email || !password) {
+        throw new Api400Error('validation error. All required fields need to be filled');
+      }
+
+      // check if the email already registered
+      const userExist = await User.findOne({ email });
+      if (userExist) {
+        throw new Api400Error('User already registered');
+      }
+
+      // its not effective. each register need to get role db first
+      // TODO: find the more effective method
+      const role = await Role.findOne({ name: 'admin' });
+
+      // check if role not exist
+      if (!role) {
+        throw new Api500Error();
+      }
+
+      // hash password
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      // try to register
+      const registeredUser = await User.create({
+        name, email, password: hashedPassword, role: role._id,
+      });
+
+      // check if somehow registering process is failed
+      if (!registeredUser) {
+        throw new Api500Error();
+      }
+
+      res.status(201).send({ message: 'Success register. please login' });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // for internal only
+  static async createAdmin(req, res, next) {
     const { name, email, password } = req.body;
 
     try {
@@ -105,15 +150,35 @@ class UserController {
     }
   }
 
+  static async updateUser(req, res, next) {
+    try {
+      let { id } = req.query;
+
+      // take the data
+      const { name, email, password } = req.body;
+
+      if (req.user.role.name === 'user') {
+        id = req.user._id;
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(id, { name, email, password });
+      if (!updatedUser) throw new Api404Error('User not found');
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async deleteUser(req, res, next) {
     // take the id
     // try to delete the user
 
-    const { id } = req.query;
     try {
+      let { id } = req.query;
+
+      if (req.user.role.name === 'user') id = req.user._id;
+
       await User.findByIdAndDelete(id);
       res.status(200).send({
-        message: 'Success deleted',
         id,
       });
     } catch (error) {

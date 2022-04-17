@@ -7,8 +7,8 @@ const { verifyToken, isAdmin } = require('../../middlewares/authHandler');
 // update transaction
 // delete transaction
 router.route('/')
-  .get(verifyToken, TransactionController.getTransactions)
-  .post(verifyToken, TransactionController.createTransaction)
+  .get(verifyToken, isAdmin, TransactionController.getTransactions)
+  .post(verifyToken, isAdmin, TransactionController.createTransaction)
   .put(verifyToken, isAdmin, TransactionController.updateTransaction)
   .delete(verifyToken, isAdmin, TransactionController.deleteTransaction);
 
