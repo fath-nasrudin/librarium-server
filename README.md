@@ -1,11 +1,11 @@
 # Librarium-server
 The server for Librarium app. An online library app for help a library to show book availability online. So librarians can check book availability then booking the book.  
 ## Links
-[API documentation]()
+[API documentation](https://librarium-server.herokuapp.com/documentation/#/Books/get_books)
 
-[deployed server - Librarium Server]()
+[deployed server - Librarium Server](https://librarium-server.herokuapp.com/documentation/#/Books/get_books)
 
-[The notes and story behind the app]()
+[The notes and story behind the app](https://fathn.notion.site/Librarium-b93625d1cc39416182fd5c74d4baa30c)
 
 [front end - Not yet available]()
 

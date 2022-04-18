@@ -21,7 +21,7 @@ const apiDocumentation = {
   info: {
     version: '1.0.0',
     title: 'Librarium - API Documentation',
-    description: 'This app is a prototype. Here is documentation to access Librarium API. There are three level of authorization: **Public**, **user**, **admin**.   the admin account is created in the system level. this is the account to access admin level resource. **email: admin@admin.com**, **password: rahasia**',
+    description: 'This app is a prototype. Here is documentation to access Librarium API. There are three level of authorization: **Public**, **user**, **admin**.   to create account with level admin, you need to register in Users /admin/register endpoint. To create account with level user, you need to create account in Users /register endpoint.',
     contact: {
       name: 'Fathurrohman Nasrudin',
       email: 'fath.nasrudin@gmail.com',
