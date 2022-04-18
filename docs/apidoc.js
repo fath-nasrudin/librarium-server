@@ -35,6 +35,10 @@ const apiDocumentation = {
 
   servers: [
     {
+      url: 'https://librarium-server.herokuapp.com/api',
+      description: 'Online Server',
+    },
+    {
       url: 'http://localhost:3000/api',
       description: 'Local Server',
     },
