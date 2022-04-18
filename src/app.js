@@ -35,6 +35,6 @@ app.use('/api', routes);
 app.use(logErrorMiddleware);
 app.use(returnError);
 
-app.listen(config.port, () => {
+app.listen(process.env.PORT || config.port, () => {
   logger.info(`listening on port ${config.port}`);
 });
