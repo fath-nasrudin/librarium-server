@@ -528,7 +528,7 @@ const apiDocumentation = {
 
     securitySchemes: {
       jwt: {
-        description: 'JWT token. the token is token that sent to client when logged in ',
+        description: 'JWT token. to get JWT token, you need to log in. To access admin level resources, you need to login with admin role\'s account ',
         type: 'http',
         scheme: 'bearer',
         bearerFormat: 'JWT',
