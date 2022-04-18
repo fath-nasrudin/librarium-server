@@ -28,6 +28,11 @@ app.use('/documentation', swaggerUI.serve, swaggerUI.setup(apiDocumentation));
 // logging http request
 app.use(httpLogger);
 
+// redirect root to documentation
+app.get('/', (req, res) => {
+  res.redirect('/documentation');
+});
+
 // all routes
 app.use('/api', routes);
 
